@@ -1,0 +1,22 @@
+# Build
+dist
+build
+coverage
+
+# Dependencies
+node_modules
+.pnpm-store
+*.log
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Database
+*.sqlite
+*.db
+
+# Misc
+.next
+out
