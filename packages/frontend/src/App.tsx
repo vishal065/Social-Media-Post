@@ -1,31 +1,41 @@
-import { useState } from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { ThemeToggle } from "./components/ThemeToggle";
 
-import "./App.css";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+function Landing() {
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen gap-4 bg-gray-50 dark:bg-neutral-900 dark:text-white">
+      <h1 className="text-4xl font-bold">Generate → Preview → Publish</h1>
+      <p className="text-gray-600 dark:text-gray-400">AI-powered social media in minutes</p>
+      <Link to="/dashboard">
+        <button className="px-6 py-3 rounded bg-black text-white dark:bg-white dark:text-black">
+          Try It Now →
+        </button>
+      </Link>
+      <div className="absolute top-4 right-4">
+        <ThemeToggle />
+      </div>
+    </div>
+  );
+}
+
+function Dashboard() {
+  return (
+    <div className="p-8 bg-white dark:bg-neutral-900 dark:text-white min-h-screen">
+      <h2 className="text-2xl font-semibold">Dashboard</h2>
+      <p>Welcome to your hackathon project 🚀</p>
+      <Link to="/">← Back</Link>
+    </div>
+  );
+}
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
