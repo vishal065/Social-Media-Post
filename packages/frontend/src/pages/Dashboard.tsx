@@ -1,48 +1,58 @@
-import React, { useState } from 'react';
-import { Sidebar, SidebarContent, SidebarProvider, SidebarTrigger, SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarMenuButton } from '../components/ui/sidebar';
-import { Button } from '../components/ui/button';
-import { Moon, Sun, LayoutDashboard, PlusSquare, History, Settings, LogOut } from 'lucide-react';
-import { CreatePost } from '../pages/CreatePost';
-import { HistoryPage } from '../pages/HistoryPage';
-import { DashboardHome } from '../pages/DashboardHome';
-import { SettingsPage } from '../pages/SettingsPage';
-import { useAppStore } from "@/lib/store";
-import { useIsMobile } from "@/hooks/use-mobile"
+import React, { useState } from "react";
 
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { useAppStore } from "@/lib/store";
+import { History, LayoutDashboard, LogOut, Moon, PlusSquare, Settings, Sun } from "lucide-react";
+
+import { Button } from "../components/ui/button";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarProvider,
+  SidebarTrigger,
+} from "../components/ui/sidebar";
+import { CreatePost } from "../pages/CreatePost";
+import { DashboardHome } from "../pages/DashboardHome";
+import { HistoryPage } from "../pages/HistoryPage";
+import { SettingsPage } from "../pages/SettingsPage";
 
 interface DashboardProps {
-  theme: 'light' | 'dark';
+  theme: "light" | "dark";
   onToggleTheme: () => void;
   onLogout: () => void;
 }
 
-type ActivePage = 'dashboard' | 'create' | 'history' | 'settings';
+type ActivePage = "dashboard" | "create" | "history" | "settings";
 
 export function Dashboard({ onLogout }: DashboardProps) {
-  const [activePage, setActivePage] = useState<ActivePage>('create');
+  const [activePage, setActivePage] = useState<ActivePage>("create");
   const { user, setUser, theme, toggleTheme } = useAppStore();
-  const isMobile = useIsMobile()
-  
+  const isMobile = useIsMobile();
+
   const navigation = [
-    { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { id: 'create', label: 'Create Post', icon: PlusSquare },
-    { id: 'history', label: 'History', icon: History },
-    { id: 'settings', label: 'Settings', icon: Settings },
+    { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
+    { id: "create", label: "Create Post", icon: PlusSquare },
+    { id: "history", label: "History", icon: History },
+    { id: "settings", label: "Settings", icon: Settings },
   ];
 
   const renderContent = () => {
     switch (activePage) {
-      case 'dashboard':
+      case "dashboard":
         return <DashboardHome />;
-      case 'create':
+      case "create":
         return <CreatePost />;
-      case 'history':
+      case "history":
         return <HistoryPage />;
-      case 'settings':
+      case "settings":
         return <SettingsPage />;
       default:
         return <CreatePost />;
@@ -72,12 +82,12 @@ export function Dashboard({ onLogout }: DashboardProps) {
               <h2 className="text-2xl font-semibold">Echooo</h2>
               <div className="flex items-center gap-2">
                 <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-2xl">
-                {theme === "light" ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
+                  {theme === "light" ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
                 </Button>
               </div>
             </div>
           </SidebarHeader>
-          
+
           <SidebarContent>
             <SidebarMenu className="px-2">
               {navigation.map((item) => (
@@ -92,18 +102,20 @@ export function Dashboard({ onLogout }: DashboardProps) {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
-              
-               {user && <div className="mt-auto pt-4">
-                <SidebarMenuItem>
-                  <SidebarMenuButton
-                    onClick={onLogout}
-                    className="rounded-xl text-destructive hover:text-destructive"
-                  >
-                    <LogOut className="h-4 w-4" />
-                    <span>Logout</span>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              </div>}
+
+              {user && (
+                <div className="mt-auto pt-4">
+                  <SidebarMenuItem>
+                    <SidebarMenuButton
+                      onClick={onLogout}
+                      className="rounded-xl text-destructive hover:text-destructive"
+                    >
+                      <LogOut className="h-4 w-4" />
+                      <span>Logout</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                </div>
+              )}
             </SidebarMenu>
           </SidebarContent>
         </Sidebar>
@@ -112,14 +124,15 @@ export function Dashboard({ onLogout }: DashboardProps) {
           <header className="flex fle-row border-b border-border p-4 align-end justify-between items-center">
             {isMobile && <SidebarTrigger />}
             {!user && <div></div>}
-            
 
-             {/* Login / Signup */}
+            {/* Login / Signup */}
             <Dialog open={isLoginModalOpen} onOpenChange={setIsLoginModalOpen}>
               <DialogTrigger asChild>
-                {!user && <Button variant="ghost" className="rounded-2xl">
-                {user ? "Account" : "Login / Signup"}
-              </Button>}
+                {!user && (
+                  <Button variant="ghost" className="rounded-2xl">
+                    {user ? "Account" : "Login / Signup"}
+                  </Button>
+                )}
               </DialogTrigger>
               <DialogContent className="rounded-2xl border-border">
                 <Card className="border-0 shadow-none">
@@ -164,10 +177,8 @@ export function Dashboard({ onLogout }: DashboardProps) {
               </DialogContent>
             </Dialog>
           </header>
-          
-          <main className="flex-1 overflow-auto">
-            {renderContent()}
-          </main>
+
+          <main className="flex-1 overflow-auto">{renderContent()}</main>
         </div>
       </div>
     </SidebarProvider>

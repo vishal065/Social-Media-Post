@@ -1,25 +1,27 @@
-import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { Button } from '../components/ui/button';
-import { Badge } from '../components/ui/badge';
-import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
-import { TrendingUp, Users, MessageSquare, Share2, PlusSquare } from 'lucide-react';
+import React from "react";
+
+import { MessageSquare, PlusSquare, Share2, TrendingUp, Users } from "lucide-react";
+import { Bar, BarChart, Cell, Pie, PieChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
+
+import { Badge } from "../components/ui/badge";
+import { Button } from "../components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 
 const engagementData = [
-  { name: 'Mon', posts: 4, engagement: 120 },
-  { name: 'Tue', posts: 6, engagement: 180 },
-  { name: 'Wed', posts: 8, engagement: 240 },
-  { name: 'Thu', posts: 5, engagement: 150 },
-  { name: 'Fri', posts: 7, engagement: 210 },
-  { name: 'Sat', posts: 3, engagement: 90 },
-  { name: 'Sun', posts: 4, engagement: 130 },
+  { name: "Mon", posts: 4, engagement: 120 },
+  { name: "Tue", posts: 6, engagement: 180 },
+  { name: "Wed", posts: 8, engagement: 240 },
+  { name: "Thu", posts: 5, engagement: 150 },
+  { name: "Fri", posts: 7, engagement: 210 },
+  { name: "Sat", posts: 3, engagement: 90 },
+  { name: "Sun", posts: 4, engagement: 130 },
 ];
 
 const platformData = [
-  { name: 'Twitter', value: 35, color: '#1DA1F2' },
-  { name: 'LinkedIn', value: 30, color: '#0077B5' },
-  { name: 'Instagram', value: 25, color: '#E4405F' },
-  { name: 'Facebook', value: 10, color: '#1877F2' },
+  { name: "Twitter", value: 35, color: "#1DA1F2" },
+  { name: "LinkedIn", value: 30, color: "#0077B5" },
+  { name: "Instagram", value: 25, color: "#E4405F" },
+  { name: "Facebook", value: 10, color: "#1877F2" },
 ];
 
 export function DashboardHome() {
@@ -27,7 +29,9 @@ export function DashboardHome() {
     <div className="p-8 max-w-7xl mx-auto">
       <div className="mb-8">
         <h1 className="text-3xl mb-2">Dashboard</h1>
-        <p className="text-muted-foreground">Welcome back! Here's your content performance overview.</p>
+        <p className="text-muted-foreground">
+          Welcome back! Here's your content performance overview.
+        </p>
       </div>
 
       {/* Stats Cards */}
@@ -128,8 +132,8 @@ export function DashboardHome() {
               {platformData.map((platform) => (
                 <div key={platform.name} className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <div 
-                      className="w-3 h-3 rounded-full" 
+                    <div
+                      className="w-3 h-3 rounded-full"
                       style={{ backgroundColor: platform.color }}
                     />
                     <span className="text-sm">{platform.name}</span>
@@ -149,21 +153,32 @@ export function DashboardHome() {
           <CardContent>
             <div className="space-y-4">
               {[
-                { action: 'Published to Twitter, LinkedIn', time: '2 hours ago', status: 'success' },
-                { action: 'Generated AI content for tech announcement', time: '4 hours ago', status: 'success' },
-                { action: 'Failed to publish to Instagram', time: '6 hours ago', status: 'error' },
-                { action: 'Published to all platforms', time: '1 day ago', status: 'success' },
+                {
+                  action: "Published to Twitter, LinkedIn",
+                  time: "2 hours ago",
+                  status: "success",
+                },
+                {
+                  action: "Generated AI content for tech announcement",
+                  time: "4 hours ago",
+                  status: "success",
+                },
+                { action: "Failed to publish to Instagram", time: "6 hours ago", status: "error" },
+                { action: "Published to all platforms", time: "1 day ago", status: "success" },
               ].map((activity, index) => (
-                <div key={index} className="flex items-center justify-between p-3 border border-border rounded-xl">
+                <div
+                  key={index}
+                  className="flex items-center justify-between p-3 border border-border rounded-xl"
+                >
                   <div>
                     <p className="text-sm">{activity.action}</p>
                     <p className="text-xs text-muted-foreground">{activity.time}</p>
                   </div>
-                  <Badge 
-                    variant={activity.status === 'success' ? 'default' : 'destructive'}
+                  <Badge
+                    variant={activity.status === "success" ? "default" : "destructive"}
                     className="rounded-full"
                   >
-                    {activity.status === 'success' ? 'Success' : 'Failed'}
+                    {activity.status === "success" ? "Success" : "Failed"}
                   </Badge>
                 </div>
               ))}

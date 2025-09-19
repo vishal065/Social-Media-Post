@@ -1,9 +1,11 @@
-import React from 'react';
-import { Card, CardContent } from '../ui/card';
-import { Avatar, AvatarFallback } from '../ui/avatar';
-import { Button } from '../ui/button';
-import { Heart, MessageCircle, Send, Bookmark, MoreHorizontal } from 'lucide-react';
-import { ImageWithFallback } from '../common/ImageWithFallback';
+import React from "react";
+
+import { Bookmark, Heart, MessageCircle, MoreHorizontal, Send } from "lucide-react";
+
+import { ImageWithFallback } from "../common/ImageWithFallback";
+import { Avatar, AvatarFallback } from "../ui/avatar";
+import { Button } from "../ui/button";
+import { Card, CardContent } from "../ui/card";
 
 interface InstagramPreviewProps {
   content: {
@@ -21,9 +23,7 @@ export function InstagramPreview({ content }: InstagramPreviewProps) {
         <div className="flex items-center justify-between p-4 pb-2">
           <div className="flex items-center gap-3">
             <Avatar className="h-8 w-8">
-              <AvatarFallback className="bg-primary text-primary-foreground">
-                E
-              </AvatarFallback>
+              <AvatarFallback className="bg-primary text-primary-foreground">E</AvatarFallback>
             </Avatar>
             <span className="font-medium text-sm">echooo</span>
           </div>
@@ -70,16 +70,12 @@ export function InstagramPreview({ content }: InstagramPreviewProps) {
           {/* Caption */}
           <div className="text-sm">
             <span className="font-medium mr-2">echooo</span>
-            <span className="whitespace-pre-wrap">
-              {content.text}
-            </span>
+            <span className="whitespace-pre-wrap">{content.text}</span>
           </div>
 
           {/* Comments */}
           <div className="mt-2">
-            <button className="text-sm text-muted-foreground">
-              View all 12 comments
-            </button>
+            <button className="text-sm text-muted-foreground">View all 12 comments</button>
           </div>
 
           {/* Time */}

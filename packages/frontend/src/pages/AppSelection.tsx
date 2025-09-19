@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { Button } from '../components/ui/button';
-import { Badge } from '../components/ui/badge';
-import { Switch } from '../components/ui/switch';
-import { Twitter, Linkedin, Instagram, Facebook, ArrowRight } from 'lucide-react';
+import React, { useState } from "react";
+
+import { ArrowRight, Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
+
+import { Badge } from "../components/ui/badge";
+import { Button } from "../components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
+import { Switch } from "../components/ui/switch";
 
 interface AppSelectionProps {
   onNext: (platforms: string[]) => void;
@@ -11,32 +13,32 @@ interface AppSelectionProps {
 
 const platforms = [
   {
-    id: 'twitter',
-    name: 'Twitter',
+    id: "twitter",
+    name: "Twitter",
     icon: Twitter,
-    color: 'bg-black text-white',
-    description: 'Share quick thoughts and updates',
+    color: "bg-black text-white",
+    description: "Share quick thoughts and updates",
   },
   {
-    id: 'linkedin',
-    name: 'LinkedIn',
+    id: "linkedin",
+    name: "LinkedIn",
     icon: Linkedin,
-    color: 'bg-blue-600 text-white',
-    description: 'Professional networking and content',
+    color: "bg-blue-600 text-white",
+    description: "Professional networking and content",
   },
   {
-    id: 'instagram',
-    name: 'Instagram',
+    id: "instagram",
+    name: "Instagram",
     icon: Instagram,
-    color: 'bg-gradient-to-r from-purple-500 to-pink-500 text-white',
-    description: 'Visual content and stories',
+    color: "bg-gradient-to-r from-purple-500 to-pink-500 text-white",
+    description: "Visual content and stories",
   },
   {
-    id: 'facebook',
-    name: 'Facebook',
+    id: "facebook",
+    name: "Facebook",
     icon: Facebook,
-    color: 'bg-blue-500 text-white',
-    description: 'Connect with friends and family',
+    color: "bg-blue-500 text-white",
+    description: "Connect with friends and family",
   },
 ];
 
@@ -49,9 +51,9 @@ export function AppSelection({ onNext }: AppSelectionProps) {
   });
 
   const togglePlatform = (platformId: string) => {
-    setConnectedPlatforms(prev => ({
+    setConnectedPlatforms((prev) => ({
       ...prev,
-      [platformId]: !prev[platformId]
+      [platformId]: !prev[platformId],
     }));
   };
 
@@ -76,9 +78,12 @@ export function AppSelection({ onNext }: AppSelectionProps) {
         {platforms.map((platform) => {
           const Icon = platform.icon;
           const isConnected = connectedPlatforms[platform.id];
-          
+
           return (
-            <Card key={platform.id} className="rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+            <Card
+              key={platform.id}
+              className="rounded-2xl shadow-sm hover:shadow-md transition-shadow"
+            >
               <CardHeader className="pb-4">
                 <div className="flex items-center justify-between">
                   <div className={`p-3 rounded-2xl ${platform.color}`}>
@@ -93,13 +98,9 @@ export function AppSelection({ onNext }: AppSelectionProps) {
                 <CardTitle className="text-lg">{platform.name}</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground mb-4">
-                  {platform.description}
-                </p>
+                <p className="text-sm text-muted-foreground mb-4">{platform.description}</p>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm">
-                    {isConnected ? 'Connected' : 'Connect'}
-                  </span>
+                  <span className="text-sm">{isConnected ? "Connected" : "Connect"}</span>
                   <Switch
                     checked={isConnected}
                     onCheckedChange={() => togglePlatform(platform.id)}
@@ -118,7 +119,8 @@ export function AppSelection({ onNext }: AppSelectionProps) {
           disabled={selectedPlatforms.length === 0}
           className="px-8 py-3 rounded-2xl"
         >
-          Continue with {selectedPlatforms.length} platform{selectedPlatforms.length !== 1 ? 's' : ''}
+          Continue with {selectedPlatforms.length} platform
+          {selectedPlatforms.length !== 1 ? "s" : ""}
           <ArrowRight className="ml-2 h-5 w-5" />
         </Button>
       </div>

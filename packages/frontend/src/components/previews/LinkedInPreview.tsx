@@ -1,9 +1,11 @@
-import React from 'react';
-import { Card, CardContent } from '../ui/card';
-import { Avatar, AvatarFallback } from '../ui/avatar';
-import { Button } from '../ui/button';
-import { ThumbsUp, MessageSquare, Share2, Send, MoreHorizontal } from 'lucide-react';
-import { ImageWithFallback } from '../common/ImageWithFallback';
+import React from "react";
+
+import { MessageSquare, MoreHorizontal, Send, Share2, ThumbsUp } from "lucide-react";
+
+import { ImageWithFallback } from "../common/ImageWithFallback";
+import { Avatar, AvatarFallback } from "../ui/avatar";
+import { Button } from "../ui/button";
+import { Card, CardContent } from "../ui/card";
 
 interface LinkedInPreviewProps {
   content: {
@@ -20,9 +22,7 @@ export function LinkedInPreview({ content }: LinkedInPreviewProps) {
         {/* Header */}
         <div className="flex items-start gap-3 mb-4">
           <Avatar className="h-12 w-12">
-            <AvatarFallback className="bg-primary text-primary-foreground">
-              E
-            </AvatarFallback>
+            <AvatarFallback className="bg-primary text-primary-foreground">E</AvatarFallback>
           </Avatar>
           <div className="flex-1">
             <div className="flex items-center justify-between">
@@ -40,9 +40,7 @@ export function LinkedInPreview({ content }: LinkedInPreviewProps) {
 
         {/* Content */}
         <div className="mb-4">
-          <p className="whitespace-pre-wrap leading-relaxed">
-            {content.text}
-          </p>
+          <p className="whitespace-pre-wrap leading-relaxed">{content.text}</p>
         </div>
 
         {/* Image */}
