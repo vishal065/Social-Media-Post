@@ -1,9 +1,10 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ThemeProvider } from "./providers/ThemeProvider";
-import { LandingPage } from "./pages/LandingPage";
-import { Dashboard } from "./pages/Dashboard";
 
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import { Dashboard } from "./pages/Dashboard";
+import { LandingPage } from "./pages/LandingPage";
+import { ThemeProvider } from "./providers/ThemeProvider";
 
 function App() {
   return (

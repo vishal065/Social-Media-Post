@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import { Button } from '../components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { Badge } from '../components/ui/badge';
-import { Progress } from '../components/ui/progress';
-import { ArrowLeft, Check, X, Clock, Twitter, Linkedin, Instagram, Facebook } from 'lucide-react';
+import React, { useState } from "react";
+
+import { ArrowLeft, Check, Clock, Facebook, Instagram, Linkedin, Twitter, X } from "lucide-react";
+
+import { Badge } from "../components/ui/badge";
+import { Button } from "../components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
+import { Progress } from "../components/ui/progress";
 
 interface PublishPageProps {
   content: {
@@ -16,7 +18,7 @@ interface PublishPageProps {
   onBack: () => void;
 }
 
-type PublishStatus = 'pending' | 'publishing' | 'success' | 'failed';
+type PublishStatus = "pending" | "publishing" | "success" | "failed";
 
 interface PlatformStatus {
   platform: string;
@@ -32,17 +34,17 @@ const platformIcons = {
 };
 
 const platformLabels = {
-  twitter: 'Twitter',
-  linkedin: 'LinkedIn',
-  instagram: 'Instagram',
-  facebook: 'Facebook',
+  twitter: "Twitter",
+  linkedin: "LinkedIn",
+  instagram: "Instagram",
+  facebook: "Facebook",
 };
 
 export function PublishPage({ content, selectedPlatforms, onComplete, onBack }: PublishPageProps) {
   const [publishStatuses, setPublishStatuses] = useState<PlatformStatus[]>(
-    selectedPlatforms.map(platform => ({
+    selectedPlatforms.map((platform) => ({
       platform,
-      status: 'pending' as PublishStatus,
+      status: "pending" as PublishStatus,
     }))
   );
   const [isPublishing, setIsPublishing] = useState(false);
@@ -54,31 +56,27 @@ export function PublishPage({ content, selectedPlatforms, onComplete, onBack }: 
 
     for (let i = 0; i < selectedPlatforms.length; i++) {
       const platform = selectedPlatforms[i];
-      
+
       // Update status to publishing
-      setPublishStatuses(prev => 
-        prev.map(status => 
-          status.platform === platform 
-            ? { ...status, status: 'publishing' as PublishStatus }
+      setPublishStatuses((prev) =>
+        prev.map((status) =>
+          status.platform === platform
+            ? { ...status, status: "publishing" as PublishStatus }
             : status
         )
       );
 
       // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      await new Promise((resolve) => setTimeout(resolve, 1500));
 
       // Randomly determine success/failure (80% success rate)
       const isSuccess = Math.random() > 0.2;
-      const newStatus: PublishStatus = isSuccess ? 'success' : 'failed';
-      const message = isSuccess 
-        ? 'Posted successfully' 
-        : 'Failed to connect to API';
+      const newStatus: PublishStatus = isSuccess ? "success" : "failed";
+      const message = isSuccess ? "Posted successfully" : "Failed to connect to API";
 
-      setPublishStatuses(prev => 
-        prev.map(status => 
-          status.platform === platform 
-            ? { ...status, status: newStatus, message }
-            : status
+      setPublishStatuses((prev) =>
+        prev.map((status) =>
+          status.platform === platform ? { ...status, status: newStatus, message } : status
         )
       );
 
@@ -92,21 +90,23 @@ export function PublishPage({ content, selectedPlatforms, onComplete, onBack }: 
     simulatePublishing();
   };
 
-  const isComplete = publishStatuses.every(status => 
-    status.status === 'success' || status.status === 'failed'
+  const isComplete = publishStatuses.every(
+    (status) => status.status === "success" || status.status === "failed"
   );
 
-  const successCount = publishStatuses.filter(status => status.status === 'success').length;
-  const failureCount = publishStatuses.filter(status => status.status === 'failed').length;
+  const successCount = publishStatuses.filter((status) => status.status === "success").length;
+  const failureCount = publishStatuses.filter((status) => status.status === "failed").length;
 
   const getStatusIcon = (status: PublishStatus) => {
     switch (status) {
-      case 'success':
+      case "success":
         return <Check className="h-4 w-4 text-green-500" />;
-      case 'failed':
+      case "failed":
         return <X className="h-4 w-4 text-destructive" />;
-      case 'publishing':
-        return <div className="animate-spin h-4 w-4 border-2 border-current border-t-transparent rounded-full" />;
+      case "publishing":
+        return (
+          <div className="animate-spin h-4 w-4 border-2 border-current border-t-transparent rounded-full" />
+        );
       default:
         return <Clock className="h-4 w-4 text-muted-foreground" />;
     }
@@ -114,11 +114,11 @@ export function PublishPage({ content, selectedPlatforms, onComplete, onBack }: 
 
   const getStatusBadge = (status: PublishStatus) => {
     switch (status) {
-      case 'success':
+      case "success":
         return <Badge className="bg-green-500 text-white">Posted</Badge>;
-      case 'failed':
+      case "failed":
         return <Badge variant="destructive">Failed</Badge>;
-      case 'publishing':
+      case "publishing":
         return <Badge variant="secondary">Publishing...</Badge>;
       default:
         return <Badge variant="outline">Pending</Badge>;
@@ -136,7 +136,8 @@ export function PublishPage({ content, selectedPlatforms, onComplete, onBack }: 
           <div>
             <h2 className="text-xl">Publish Content</h2>
             <p className="text-sm text-muted-foreground">
-              Publish to {selectedPlatforms.length} platform{selectedPlatforms.length !== 1 ? 's' : ''}
+              Publish to {selectedPlatforms.length} platform
+              {selectedPlatforms.length !== 1 ? "s" : ""}
             </p>
           </div>
         </div>
@@ -212,9 +213,12 @@ export function PublishPage({ content, selectedPlatforms, onComplete, onBack }: 
                 {publishStatuses.map((status) => {
                   const Icon = platformIcons[status.platform as keyof typeof platformIcons];
                   const label = platformLabels[status.platform as keyof typeof platformLabels];
-                  
+
                   return (
-                    <div key={status.platform} className="flex items-center justify-between p-4 border border-border rounded-xl">
+                    <div
+                      key={status.platform}
+                      className="flex items-center justify-between p-4 border border-border rounded-xl"
+                    >
                       <div className="flex items-center gap-3">
                         <Icon className="h-5 w-5" />
                         <div>
@@ -241,7 +245,7 @@ export function PublishPage({ content, selectedPlatforms, onComplete, onBack }: 
               <CardContent className="p-6 text-center">
                 <h3 className="text-lg font-medium mb-2">Publishing Complete!</h3>
                 <p className="text-muted-foreground">
-                  Successfully published to {successCount} platform{successCount !== 1 ? 's' : ''}
+                  Successfully published to {successCount} platform{successCount !== 1 ? "s" : ""}
                   {failureCount > 0 && `, ${failureCount} failed`}
                 </p>
               </CardContent>

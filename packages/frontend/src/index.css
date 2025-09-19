@@ -28,8 +28,7 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem
-  ;
+    --radius: 0.5rem;
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -37,33 +36,34 @@
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%}
- .dark {
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+  .dark {
     /* Base colors */
-    --background: 0 0% 5%;           /* true black background */
-    --foreground: 0 0% 95%;          /* almost white text */
+    --background: 0 0% 5%; /* true black background */
+    --foreground: 0 0% 95%; /* almost white text */
 
     /* Cards & popovers */
-    --card: 0 0% 5%;                 /* very dark gray */
+    --card: 0 0% 5%; /* very dark gray */
     --card-foreground: 0 0% 95%;
     --popover: 0 0% 12%;
     --popover-foreground: 0 0% 95%;
 
     /* Primary / accents */
-    --primary: 0 0% 95%;              /* white-ish for buttons/text */
+    --primary: 0 0% 95%; /* white-ish for buttons/text */
     --primary-foreground: 0 0% 5%;
 
-    --secondary: 0 0% 20%;            /* subtle gray background */
+    --secondary: 0 0% 20%; /* subtle gray background */
     --secondary-foreground: 0 0% 95%;
 
     --muted: 0 0% 15%;
     --muted-foreground: 0 0% 70%;
 
-    --accent: 0 0% 80%;               /* slightly lighter accent */
+    --accent: 0 0% 80%; /* slightly lighter accent */
     --accent-foreground: 0 0% 5%;
 
     /* Alerts */
-    --destructive: 0 75% 50%;         /* red for destructive actions */
+    --destructive: 0 75% 50%; /* red for destructive actions */
     --destructive-foreground: 0 0% 95%;
 
     /* Borders / inputs */
@@ -72,7 +72,7 @@
     --ring: 0 0% 70%;
 
     /* Charts */
-    --chart-1: 0 0% 70%;   /* gray shades for charts */
+    --chart-1: 0 0% 70%; /* gray shades for charts */
     --chart-2: 0 0% 60%;
     --chart-3: 0 0% 50%;
     --chart-4: 0 0% 40%;

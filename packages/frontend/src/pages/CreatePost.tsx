@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import { AppSelection } from './AppSelection';
-import { ChatUI } from './ChatUI';
-import { PreviewPage } from './PreviewPage';
-import { PublishPage } from './PublishPage';
+import React, { useState } from "react";
 
-type CreatePostStep = 'platforms' | 'chat' | 'preview' | 'publish';
+import { AppSelection } from "./AppSelection";
+import { ChatUI } from "./ChatUI";
+import { PreviewPage } from "./PreviewPage";
+import { PublishPage } from "./PublishPage";
+
+type CreatePostStep = "platforms" | "chat" | "preview" | "publish";
 
 export function CreatePost() {
-  const [currentStep, setCurrentStep] = useState<CreatePostStep>('platforms');
+  const [currentStep, setCurrentStep] = useState<CreatePostStep>("platforms");
   const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([]);
   const [generatedContent, setGeneratedContent] = useState<{
     text: string;
@@ -17,53 +18,57 @@ export function CreatePost() {
 
   const handlePlatformsSelected = (platforms: string[]) => {
     setSelectedPlatforms(platforms);
-    setCurrentStep('chat');
+    setCurrentStep("chat");
   };
 
-  const handleContentGenerated = (content: { text: string; hashtags: string[]; imageUrl?: string }) => {
+  const handleContentGenerated = (content: {
+    text: string;
+    hashtags: string[];
+    imageUrl?: string;
+  }) => {
     setGeneratedContent(content);
-    setCurrentStep('preview');
+    setCurrentStep("preview");
   };
 
   const handlePreviewComplete = () => {
-    setCurrentStep('publish');
+    setCurrentStep("publish");
   };
 
   const handlePublishComplete = () => {
     // Reset to start
-    setCurrentStep('platforms');
+    setCurrentStep("platforms");
     setSelectedPlatforms([]);
     setGeneratedContent(null);
   };
 
   const renderStep = () => {
     switch (currentStep) {
-      case 'platforms':
+      case "platforms":
         return <AppSelection onNext={handlePlatformsSelected} />;
-      case 'chat':
+      case "chat":
         return (
-          <ChatUI 
+          <ChatUI
             selectedPlatforms={selectedPlatforms}
             onContentGenerated={handleContentGenerated}
-            onBack={() => setCurrentStep('platforms')}
+            onBack={() => setCurrentStep("platforms")}
           />
         );
-      case 'preview':
+      case "preview":
         return (
           <PreviewPage
             content={generatedContent!}
             selectedPlatforms={selectedPlatforms}
             onNext={handlePreviewComplete}
-            onBack={() => setCurrentStep('chat')}
+            onBack={() => setCurrentStep("chat")}
           />
         );
-      case 'publish':
+      case "publish":
         return (
           <PublishPage
             content={generatedContent!}
             selectedPlatforms={selectedPlatforms}
             onComplete={handlePublishComplete}
-            onBack={() => setCurrentStep('preview')}
+            onBack={() => setCurrentStep("preview")}
           />
         );
       default:
@@ -71,9 +76,5 @@ export function CreatePost() {
     }
   };
 
-  return (
-    <div className="h-full">
-      {renderStep()}
-    </div>
-  );
+  return <div className="h-full">{renderStep()}</div>;
 }

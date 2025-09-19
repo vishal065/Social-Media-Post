@@ -1,17 +1,16 @@
 import React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAppStore } from "@/lib/store";
 
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Moon, Sun, ArrowRight } from "lucide-react";
+import { useAppStore } from "@/lib/store";
+import { ArrowRight, Moon, Sun } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export function LandingPage() {
-
   const navigate = useNavigate();
   const { user, setUser, theme, toggleTheme } = useAppStore();
 
@@ -35,9 +34,9 @@ export function LandingPage() {
       {/* Header */}
       <header className="absolute top-0 right-0 p-6 flex items-center gap-4">
         {/* Theme toggle */}
-       <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-2xl">
-        {theme === "light" ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
-       </Button>
+        <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-2xl">
+          {theme === "light" ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
+        </Button>
 
         {/* Login / Signup */}
         <Dialog open={isLoginModalOpen} onOpenChange={setIsLoginModalOpen}>
@@ -104,9 +103,7 @@ export function LandingPage() {
           <Button
             size="lg"
             className="text-xl px-12 py-6 rounded-2xl shadow-lg hover:shadow-xl transition-all"
-            onClick={() =>
-              navigate("/dashboard")
-            }
+            onClick={() => navigate("/dashboard")}
           >
             Try it Now
             <ArrowRight className="ml-2 h-6 w-6" />

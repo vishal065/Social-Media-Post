@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
-import { Button } from '../components/ui/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { TwitterPreview } from '../components/previews/TwitterPreview';
-import { LinkedInPreview } from '../components/previews/LinkedInPreview';
-import { InstagramPreview } from '../components/previews/InstagramPreview';
-import { FacebookPreview } from '../components/previews/FacebookPreview';
+import React, { useState } from "react";
+
+import { ArrowLeft, ArrowRight } from "lucide-react";
+
+import { FacebookPreview } from "../components/previews/FacebookPreview";
+import { InstagramPreview } from "../components/previews/InstagramPreview";
+import { LinkedInPreview } from "../components/previews/LinkedInPreview";
+import { TwitterPreview } from "../components/previews/TwitterPreview";
+import { Button } from "../components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
 
 interface PreviewPageProps {
   content: {
@@ -29,10 +31,10 @@ export function PreviewPage({ content, selectedPlatforms, onNext, onBack }: Prev
   };
 
   const platformLabels = {
-    twitter: 'Twitter',
-    linkedin: 'LinkedIn',
-    instagram: 'Instagram',
-    facebook: 'Facebook',
+    twitter: "Twitter",
+    linkedin: "LinkedIn",
+    instagram: "Instagram",
+    facebook: "Facebook",
   };
 
   return (
@@ -61,18 +63,15 @@ export function PreviewPage({ content, selectedPlatforms, onNext, onBack }: Prev
         <Tabs value={activeTab} onValueChange={setActiveTab} className="max-w-4xl mx-auto">
           <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4 rounded-2xl p-1">
             {selectedPlatforms.map((platform) => (
-              <TabsTrigger 
-                key={platform} 
-                value={platform}
-                className="rounded-xl"
-              >
+              <TabsTrigger key={platform} value={platform} className="rounded-xl">
                 {platformLabels[platform as keyof typeof platformLabels]}
               </TabsTrigger>
             ))}
           </TabsList>
 
           {selectedPlatforms.map((platform) => {
-            const PreviewComponent = platformComponents[platform as keyof typeof platformComponents];
+            const PreviewComponent =
+              platformComponents[platform as keyof typeof platformComponents];
             return (
               <TabsContent key={platform} value={platform} className="mt-8">
                 <div className="flex justify-center">

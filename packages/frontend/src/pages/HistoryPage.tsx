@@ -1,10 +1,28 @@
-import React, { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { Badge } from '../components/ui/badge';
-import { Button } from '../components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../components/ui/dialog';
-import { Check, X, Clock, Twitter, Linkedin, Instagram, Facebook, Calendar, Eye } from 'lucide-react';
-import { ImageWithFallback } from '../components/common/ImageWithFallback';
+import React, { useState } from "react";
+
+import {
+  Calendar,
+  Check,
+  Clock,
+  Eye,
+  Facebook,
+  Instagram,
+  Linkedin,
+  Twitter,
+  X,
+} from "lucide-react";
+
+import { ImageWithFallback } from "../components/common/ImageWithFallback";
+import { Badge } from "../components/ui/badge";
+import { Button } from "../components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../components/ui/dialog";
 
 interface Post {
   id: string;
@@ -15,7 +33,7 @@ interface Post {
   };
   platforms: {
     platform: string;
-    status: 'success' | 'failed' | 'pending';
+    status: "success" | "failed" | "pending";
     publishedAt?: string;
     error?: string;
   }[];
@@ -24,46 +42,46 @@ interface Post {
 
 const mockPosts: Post[] = [
   {
-    id: '1',
+    id: "1",
     content: {
       text: "🚀 Just launched our new AI-powered content creation platform! Creating engaging social media posts has never been easier. From concept to publish in minutes! #AI #SocialMedia #ContentCreation",
-      hashtags: ['#AI', '#SocialMedia', '#ContentCreation', '#Innovation', '#Technology'],
-      imageUrl: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400'
+      hashtags: ["#AI", "#SocialMedia", "#ContentCreation", "#Innovation", "#Technology"],
+      imageUrl: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400",
     },
     platforms: [
-      { platform: 'twitter', status: 'success', publishedAt: '2 hours ago' },
-      { platform: 'linkedin', status: 'success', publishedAt: '2 hours ago' },
-      { platform: 'instagram', status: 'failed', error: 'API connection failed' },
+      { platform: "twitter", status: "success", publishedAt: "2 hours ago" },
+      { platform: "linkedin", status: "success", publishedAt: "2 hours ago" },
+      { platform: "instagram", status: "failed", error: "API connection failed" },
     ],
-    createdAt: '2 hours ago'
+    createdAt: "2 hours ago",
   },
   {
-    id: '2',
+    id: "2",
     content: {
       text: "Excited to share our latest breakthrough in AI technology! This platform transforms how businesses create and manage their social media presence. What do you think? #TechInnovation #AI #Business",
-      hashtags: ['#TechInnovation', '#AI', '#Business', '#SocialMediaManagement', '#Startup'],
-      imageUrl: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400'
+      hashtags: ["#TechInnovation", "#AI", "#Business", "#SocialMediaManagement", "#Startup"],
+      imageUrl: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400",
     },
     platforms: [
-      { platform: 'twitter', status: 'success', publishedAt: '1 day ago' },
-      { platform: 'linkedin', status: 'success', publishedAt: '1 day ago' },
-      { platform: 'facebook', status: 'success', publishedAt: '1 day ago' },
+      { platform: "twitter", status: "success", publishedAt: "1 day ago" },
+      { platform: "linkedin", status: "success", publishedAt: "1 day ago" },
+      { platform: "facebook", status: "success", publishedAt: "1 day ago" },
     ],
-    createdAt: '1 day ago'
+    createdAt: "1 day ago",
   },
   {
-    id: '3',
+    id: "3",
     content: {
       text: "The future of content creation is here! 🎯 Generate, preview, and publish across all platforms seamlessly. Ready to revolutionize your social media strategy? #Future #ContentStrategy #AI",
-      hashtags: ['#Future', '#ContentStrategy', '#AI', '#SocialMedia', '#Marketing'],
-      imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400'
+      hashtags: ["#Future", "#ContentStrategy", "#AI", "#SocialMedia", "#Marketing"],
+      imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400",
     },
     platforms: [
-      { platform: 'twitter', status: 'pending' },
-      { platform: 'linkedin', status: 'pending' },
+      { platform: "twitter", status: "pending" },
+      { platform: "linkedin", status: "pending" },
     ],
-    createdAt: '3 days ago'
-  }
+    createdAt: "3 days ago",
+  },
 ];
 
 const platformIcons = {
@@ -74,10 +92,10 @@ const platformIcons = {
 };
 
 const platformLabels = {
-  twitter: 'Twitter',
-  linkedin: 'LinkedIn',
-  instagram: 'Instagram',
-  facebook: 'Facebook',
+  twitter: "Twitter",
+  linkedin: "LinkedIn",
+  instagram: "Instagram",
+  facebook: "Facebook",
 };
 
 export function HistoryPage() {
@@ -85,9 +103,9 @@ export function HistoryPage() {
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'success':
+      case "success":
         return <Check className="h-4 w-4 text-green-500" />;
-      case 'failed':
+      case "failed":
         return <X className="h-4 w-4 text-destructive" />;
       default:
         return <Clock className="h-4 w-4 text-muted-foreground" />;
@@ -96,24 +114,24 @@ export function HistoryPage() {
 
   const getStatusBadge = (status: string) => {
     switch (status) {
-      case 'success':
+      case "success":
         return <Badge className="bg-green-500 text-white">Success</Badge>;
-      case 'failed':
+      case "failed":
         return <Badge variant="destructive">Failed</Badge>;
       default:
         return <Badge variant="outline">Pending</Badge>;
     }
   };
 
-  const getOverallStatus = (platforms: Post['platforms']) => {
-    const hasFailure = platforms.some(p => p.status === 'failed');
-    const hasPending = platforms.some(p => p.status === 'pending');
-    const allSuccess = platforms.every(p => p.status === 'success');
+  const getOverallStatus = (platforms: Post["platforms"]) => {
+    const hasFailure = platforms.some((p) => p.status === "failed");
+    const hasPending = platforms.some((p) => p.status === "pending");
+    const allSuccess = platforms.every((p) => p.status === "success");
 
-    if (allSuccess) return { status: 'success', label: 'All Published' };
-    if (hasFailure) return { status: 'partial', label: 'Partial Success' };
-    if (hasPending) return { status: 'pending', label: 'Publishing' };
-    return { status: 'unknown', label: 'Unknown' };
+    if (allSuccess) return { status: "success", label: "All Published" };
+    if (hasFailure) return { status: "partial", label: "Partial Success" };
+    if (hasPending) return { status: "pending", label: "Publishing" };
+    return { status: "unknown", label: "Unknown" };
   };
 
   return (
@@ -126,7 +144,7 @@ export function HistoryPage() {
       <div className="space-y-6">
         {mockPosts.map((post) => {
           const overallStatus = getOverallStatus(post.platforms);
-          
+
           return (
             <Card key={post.id} className="rounded-2xl shadow-sm hover:shadow-md transition-shadow">
               <CardContent className="p-6">
@@ -162,9 +180,9 @@ export function HistoryPage() {
                         {getStatusBadge(overallStatus.status)}
                         <Dialog>
                           <DialogTrigger asChild>
-                            <Button 
-                              variant="outline" 
-                              size="sm" 
+                            <Button
+                              variant="outline"
+                              size="sm"
                               className="rounded-xl"
                               onClick={() => setSelectedPost(post)}
                             >
@@ -191,7 +209,11 @@ export function HistoryPage() {
                                   <h4 className="font-medium mb-2">Hashtags</h4>
                                   <div className="flex flex-wrap gap-2">
                                     {selectedPost.content.hashtags.map((tag, index) => (
-                                      <Badge key={index} variant="secondary" className="rounded-full">
+                                      <Badge
+                                        key={index}
+                                        variant="secondary"
+                                        className="rounded-full"
+                                      >
                                         {tag}
                                       </Badge>
                                     ))}
@@ -203,11 +225,20 @@ export function HistoryPage() {
                                   <h4 className="font-medium mb-3">Platform Status</h4>
                                   <div className="space-y-3">
                                     {selectedPost.platforms.map((platform) => {
-                                      const Icon = platformIcons[platform.platform as keyof typeof platformIcons];
-                                      const label = platformLabels[platform.platform as keyof typeof platformLabels];
-                                      
+                                      const Icon =
+                                        platformIcons[
+                                          platform.platform as keyof typeof platformIcons
+                                        ];
+                                      const label =
+                                        platformLabels[
+                                          platform.platform as keyof typeof platformLabels
+                                        ];
+
                                       return (
-                                        <div key={platform.platform} className="flex items-center justify-between p-3 border border-border rounded-xl">
+                                        <div
+                                          key={platform.platform}
+                                          className="flex items-center justify-between p-3 border border-border rounded-xl"
+                                        >
                                           <div className="flex items-center gap-3">
                                             <Icon className="h-5 w-5" />
                                             <div>
