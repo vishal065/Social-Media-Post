@@ -1,1 +1,2 @@
-//All Schema from the database will be imported from here and exported to be used in other files
+export { userRoleEnum } from "./user.model";
+export { Users } from "./user.model";
